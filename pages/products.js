@@ -11,8 +11,15 @@ font-size:1.5em;
 `;
 const ProductsGrid = styled.div`
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
   gap:30px;
+
 `;
 
 export default function ProductsPage({ newProducts }) {
