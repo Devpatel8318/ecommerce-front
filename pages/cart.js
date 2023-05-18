@@ -32,6 +32,7 @@ const ProductImageBox = styled.div`
   height:100px;
   padding:2px;
   display: flex;
+  margin: 0px auto;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
@@ -145,7 +146,7 @@ function cartPage() {
       <Center>
         <ColumnsWrapper>
           <Box>
-            <h2>Cart</h2>
+            <h1 style={{textAlign:"center"}}>Cart</h1>
 
             {!cartProducts?.length && (
               <div>Your Cart is Empty</div>
