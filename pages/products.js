@@ -5,6 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Product from '@/models/Product';
 import ProductBox from '@/components/ProductBox';
+import Footer from '@/components/Footer';
 
 const Title = styled.h1`
 font-size:1.5em;
@@ -21,20 +22,32 @@ const ProductsGrid = styled.div`
   gap:30px;
 
 `;
+const WholeScreen = styled.div`
+height: 100vh;
+display: flex;
+flex-direction: column;
+`;
+const Main = styled.div`
+flex-grow: 1;
+`;
+
 
 export default function ProductsPage({ newProducts }) {
   return (
-    <>
-      <Header />
-      <Center>
-        <Title>All Products</Title>
-        <ProductsGrid>
-          {newProducts?.length > 0 && newProducts.map(product => (
-            <ProductBox {...product} key={product._id} />
-          ))}
-        </ProductsGrid>
-      </Center>
-    </>
+    <WholeScreen>
+      <Main>
+        <Header />
+        <Center>
+          <Title>All Products</Title>
+          <ProductsGrid>
+            {newProducts?.length > 0 && newProducts.map(product => (
+              <ProductBox {...product} key={product._id} />
+            ))}
+          </ProductsGrid>
+        </Center>
+      </Main>
+      <Footer />
+    </WholeScreen>
   )
 }
 

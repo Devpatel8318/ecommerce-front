@@ -1,6 +1,7 @@
 import Button from '@/components/Button';
 import { CartContext } from '@/components/CartContext';
 import Center from '@/components/Center';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header'
 import Input from '@/components/Input';
 import Table from '@/components/Table';
@@ -61,8 +62,14 @@ const CityHolder = styled.div`
 `;
 
 
-
-
+const WholeScreen = styled.div`
+height: 100vh;
+display: flex;
+flex-direction: column;
+`;
+const Main = styled.div`
+flex-grow: 1;
+`;
 
 
 
@@ -141,97 +148,100 @@ function cartPage() {
 
 
   return (
-    <>
-      <Header />
-      <Center>
-        <ColumnsWrapper>
-          <Box>
-            <h1 style={{textAlign:"center"}}>Cart</h1>
-
-            {!cartProducts?.length && (
-              <div>Your Cart is Empty</div>
-            )}
-
-            {products?.length > 0 && (
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products?.map(product => (
-                    <tr key={product._id}>
-                      <ProductInfoCell>
-                        <ProductImageBox>
-                          <img src={product.images[0]} alt="image" />
-                        </ProductImageBox>
-                        {product.title}
-                      </ProductInfoCell>
-                      <td>
-                        <Button onClick={() => lessOfThisProduct(product._id)}>-</Button>
-                        <QuantityLabel>
-                          {cartProducts?.filter(id => id === product._id).length}
-                        </QuantityLabel>
-                        <Button onClick={() => moreOfThisProduct(product._id)}>+</Button>
-                      </td>
-                      <td>
-                        ₹{cartProducts?.filter(id => id === product._id).length * product.price}
-                      </td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>₹{total}</td>
-
-                  </tr>
-                </tbody>
-              </Table>
-            )}
-          </Box>
-          {!!cartProducts?.length && (
+    <WholeScreen>
+      <Main>
+        <Header />
+        <Center>
+          <ColumnsWrapper>
             <Box>
-              <div style={{backgroundColor:"#fff",padding:"30px",borderRadius:"20px"}}>
+              <h1 style={{ textAlign: "center" }}>Cart</h1>
 
-                <h2>Order Information</h2>
+              {!cartProducts?.length && (
+                <div>Your Cart is Empty</div>
+              )}
 
-                <Input type="text"
-                  value={name}
-                  name='name'
-                  onChange={ev => setName(ev.target.value)}
-                  placeholder='Name' />
-                <Input type="email"
-                  value={email}
-                  name='email'
-                  onChange={ev => setEmail(ev.target.value)}
-                  placeholder='Email' />
-                <Input type="text"
-                  value={address}
-                  name='address'
-                  onChange={ev => setAddress(ev.target.value)}
-                  placeholder='Address' />
-                <CityHolder>
-                  <Input type="text"
-                    value={city}
-                    name='city'
-                    onChange={ev => setCity(ev.target.value)}
-                    placeholder='City' />
-                  <Input type="text"
-                    value={postalCode}
-                    name='postalCode'
-                    onChange={ev => setPostalCode(ev.target.value)}
-                    placeholder='Postal Code' />
-                </CityHolder>
-                <Button onClick={goToPayment} block black size={'l'}>Continue to payment</Button>
-              </div>
+              {products?.length > 0 && (
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products?.map(product => (
+                      <tr key={product._id}>
+                        <ProductInfoCell>
+                          <ProductImageBox>
+                            <img src={product.images[0]} alt="image" />
+                          </ProductImageBox>
+                          {product.title}
+                        </ProductInfoCell>
+                        <td>
+                          <Button onClick={() => lessOfThisProduct(product._id)}>-</Button>
+                          <QuantityLabel>
+                            {cartProducts?.filter(id => id === product._id).length}
+                          </QuantityLabel>
+                          <Button onClick={() => moreOfThisProduct(product._id)}>+</Button>
+                        </td>
+                        <td>
+                          ₹{cartProducts?.filter(id => id === product._id).length * product.price}
+                        </td>
+                      </tr>
+                    ))}
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>₹{total}</td>
+
+                    </tr>
+                  </tbody>
+                </Table>
+              )}
             </Box>
-          )}
-        </ColumnsWrapper>
-      </Center>
-    </>
+            {!!cartProducts?.length && (
+              <Box>
+                <div style={{ backgroundColor: "#fff", padding: "30px", borderRadius: "20px" }}>
+
+                  <h2>Order Information</h2>
+
+                  <Input type="text"
+                    value={name}
+                    name='name'
+                    onChange={ev => setName(ev.target.value)}
+                    placeholder='Name' />
+                  <Input type="email"
+                    value={email}
+                    name='email'
+                    onChange={ev => setEmail(ev.target.value)}
+                    placeholder='Email' />
+                  <Input type="text"
+                    value={address}
+                    name='address'
+                    onChange={ev => setAddress(ev.target.value)}
+                    placeholder='Address' />
+                  <CityHolder>
+                    <Input type="text"
+                      value={city}
+                      name='city'
+                      onChange={ev => setCity(ev.target.value)}
+                      placeholder='City' />
+                    <Input type="text"
+                      value={postalCode}
+                      name='postalCode'
+                      onChange={ev => setPostalCode(ev.target.value)}
+                      placeholder='Postal Code' />
+                  </CityHolder>
+                  <Button onClick={goToPayment} block black size={'l'}>Continue to payment</Button>
+                </div>
+              </Box>
+            )}
+          </ColumnsWrapper>
+        </Center>
+      </Main>
+      <Footer />
+    </WholeScreen>
   )
 }
 

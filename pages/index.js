@@ -4,14 +4,18 @@ import React from 'react'
 import Product from '@/models/Product';
 import { mongooseConnect } from '@/lib/mongoose';
 import NewProducts from '@/components/NewProducts';
+import Footer from '@/components/Footer';
 
 export default function Home({featuredProduct,newProducts}) {
   return (
+    <>
     <div>
       <Header />
       <Featured product={featuredProduct}/>
       <NewProducts products={newProducts}/>
+      <Footer/>
     </div>
+    </>
   )
 }
 
