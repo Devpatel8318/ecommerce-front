@@ -9,7 +9,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
-import Order from "@/models/Order";
 
 const ColumnsWrapper = styled.div`
   display:grid;
@@ -87,21 +86,21 @@ function cartPage() {
   const [success, setSuccess] = useState(false);
 
   const router = useRouter();
-
   useEffect(() => {
-    const { order_id } = router.query;
-    console.log(order_id);
-    updateOrderId(order_id);
-
+    const { asPath: url } = router;
+    const searchParams = new URLSearchParams(url.slice(url.indexOf('?')));
+    const orderId = searchParams.get('order_id');
+    console.log(orderId);
+    axios.post('/api/order', { orderId })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }, [])
 
-  async function updateOrderId(id) {
-    if (id !== null && id !== undefined) {
-      await Order.findByIdAndUpdate(id, {
-        paid: true,
-      })
-    }
-  }
+
 
   useEffect(() => {
     if (cartProducts?.length > 0) {
@@ -115,7 +114,7 @@ function cartPage() {
 
   useEffect(() => {
     if (window && window.location.href.includes('success')) {
-      console.log("I am called");
+      // console.log("I am called");
       setSuccess(true);
       clearCart();
     }

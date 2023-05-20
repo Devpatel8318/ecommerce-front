@@ -76,10 +76,7 @@ const NavButton = styled.button`
 function Header() {
     const { cartProducts } = useContext(CartContext);
     const [mobileNavActive, setMobileNavActive] = useState(false);
-    useEffect(() => {
-        console.log('====================================');
-        console.log(mobileNavActive);
-    }, [mobileNavActive])
+   
     return (
         <StyleHeader>
             <Center>
