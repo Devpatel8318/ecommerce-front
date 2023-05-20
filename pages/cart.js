@@ -6,8 +6,10 @@ import Header from '@/components/Header'
 import Input from '@/components/Input';
 import Table from '@/components/Table';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
+import Order from "@/models/Order";
 
 const ColumnsWrapper = styled.div`
   display:grid;
@@ -83,6 +85,23 @@ function cartPage() {
   const [address, setAddress] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [success, setSuccess] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const { order_id } = router.query;
+    console.log(order_id);
+    updateOrderId(order_id);
+
+  }, [])
+
+  async function updateOrderId(id) {
+    if (id !== null && id !== undefined) {
+      await Order.findByIdAndUpdate(id, {
+        paid: true,
+      })
+    }
+  }
 
   useEffect(() => {
     if (cartProducts?.length > 0) {
