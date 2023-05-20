@@ -87,17 +87,25 @@ function cartPage() {
 
   const router = useRouter();
   useEffect(() => {
-    const { asPath: url } = router;
-    const searchParams = new URLSearchParams(url.slice(url.indexOf('?')));
-    const orderId = searchParams.get('order_id');
-    console.log(orderId);
-    axios.post('/api/order', { orderId })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+
+    if (window && window.location.href.includes('order_id')) {
+      const { asPath: url } = router;
+      const searchParams = new URLSearchParams(url.slice(url.indexOf('?')));
+      const orderId = searchParams.get('order_id');
+      console.log(orderId);
+      axios.post('/api/order', { orderId })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+
+
+
   }, [])
 
 
