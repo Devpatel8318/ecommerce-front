@@ -1,5 +1,6 @@
 import Center from '@/components/Center'
 import Header from '@/components/Header'
+import Head from 'next/head';
 import React from 'react'
 import styled from 'styled-components';
 
@@ -20,6 +21,9 @@ const PageCenter = styled.div`
 function ErrorPage() {
   return (
     <>
+    <Head>
+        <title>Dev Cart</title>
+    </Head>
     <Header/>
     <PageCenter>
        <Title>Work in Progress..</Title>

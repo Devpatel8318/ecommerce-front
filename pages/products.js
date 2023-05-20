@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Product from '@/models/Product';
 import ProductBox from '@/components/ProductBox';
 import Footer from '@/components/Footer';
+import Head from 'next/head';
 
 const Title = styled.h1`
 font-size:1.5em;
@@ -35,6 +36,9 @@ flex-grow: 1;
 export default function ProductsPage({ newProducts }) {
   return (
     <WholeScreen>
+      <Head>
+        <title>Dev Cart</title>
+      </Head>
       <Main>
         <Header />
         <Center>

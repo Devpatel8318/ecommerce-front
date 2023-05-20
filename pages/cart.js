@@ -6,6 +6,7 @@ import Header from '@/components/Header'
 import Input from '@/components/Input';
 import Table from '@/components/Table';
 import axios from 'axios';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
@@ -175,6 +176,9 @@ function cartPage() {
 
   return (
     <WholeScreen>
+      <Head>
+        <title>Dev Cart</title>
+      </Head>
       <Main>
         <Header />
         <Center>
